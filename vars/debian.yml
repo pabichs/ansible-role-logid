@@ -1,0 +1,10 @@
+---
+logid_dependencies:
+  - build-essential
+  - cmake
+  - git
+  - libconfig++-dev
+  - libevdev-dev
+  - libglib2.0-dev
+  - libudev-dev
+  - pkg-config

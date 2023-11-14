@@ -1,0 +1,66 @@
+---
+- name: Load OS specific variables
+  ansible.builtin.include_vars: "{{ lookup('ansible.builtin.first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution | lower }}.yml"
+        - "{{ ansible_os_family | lower }}.yml"
+      paths:
+        - vars
+
+- name: Install logid dependencies
+  ansible.builtin.package:
+    name: "{{ logid_dependencies }}"
+    state: present
+
+- name: Ensure logid dir
+  ansible.builtin.file:
+    path: "{{ logid_dir }}"
+    state: directory
+
+- name: "Get logid code to {{ logid_dir }}"
+  ansible.builtin.git:
+    repo: "https://github.com/PixlOne/logiops.git"
+    dest: "{{ logid_dir }}"
+    version: "{{ logid_version }}"
+  register: code_has_changed
+
+- name: Ensure build dir
+  ansible.builtin.file:
+    path: "{{ logid_build_dir }}"
+    state: directory
+
+- name: Cmake logid
+  ansible.builtin.command:
+    cmd: "{{ logid_cmake_cmd }}"
+    chdir: "{{ logid_build_dir }}"
+  changed_when: code_has_changed.changed
+
+- name: Build logid
+  community.general.make:
+    chdir: "{{ logid_build_dir }}"
+  changed_when: code_has_changed.changed
+
+- name: Install logid
+  community.general.make:
+#    cmd: "{{ logid_install_cmd }}"
+    target: install
+    chdir: "{{ logid_build_dir }}"
+  changed_when: code_has_changed.changed
+  notify: Reload systemd
+
+- name: Copy logid config
+  ansible.builtin.template:
+    src: logid.cfg.j2
+    dest: /etc/logid.cfg
+    owner: "{{ logid_config_owner | default(omit) }}"
+    group: "{{ logid_config_group | default(omit) }}"
+    mode: "{{ logid_config_mode | default(omit) }}"
+  notify: Restart logid
+
+- name: Setup logid service
+  ansible.builtin.service:
+    name: logid
+    enabled: "{{ logid_service_enabled }}"
+    state: "{{ logid_service_state }}"

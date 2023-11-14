@@ -1,0 +1,19 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    logid_config: |
+      devices: (
+      {
+        name: "MX Master 3 for Mac";
+      }
+      )
+    logid_version: "v0.2.4"
+    logid_cmake_cmd: "cmake .."
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+  tasks:
+  roles:
+    - pabichs.logid

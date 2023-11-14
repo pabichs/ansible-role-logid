@@ -1,0 +1,25 @@
+galaxy_info:
+  role_name: logid
+  namespace: pabichs
+  author: Sebastian Pabich
+  description: Ansible role to install https://github.com/PixlOne/logiops
+  license: license (BSD, MIT)
+  min_ansible_version: "2.1"
+  platforms:
+    - name: Fedora
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - jammy
+    - name: Debian
+      versions:
+        - bookworm
+    - name: RockyLinux
+      versions:
+        - 9
+  galaxy_tags:
+    - system
+    - packaging
+    - linux
+dependencies: []
