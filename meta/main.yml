@@ -15,9 +15,6 @@ galaxy_info:
     - name: Debian
       versions:
         - bookworm
-    - name: RockyLinux
-      versions:
-        - 9
   galaxy_tags:
     - system
     - packaging

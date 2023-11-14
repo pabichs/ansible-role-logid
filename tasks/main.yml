@@ -17,6 +17,7 @@
 - name: Ensure logid dir
   ansible.builtin.file:
     path: "{{ logid_dir }}"
+    mode: "0755"
     state: directory
 
 - name: "Get logid code to {{ logid_dir }}"
@@ -29,6 +30,7 @@
 - name: Ensure build dir
   ansible.builtin.file:
     path: "{{ logid_build_dir }}"
+    mode: "0755"
     state: directory
 
 - name: Cmake logid
