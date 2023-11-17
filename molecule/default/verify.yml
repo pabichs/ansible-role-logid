@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  become: yes
+  tasks:
+    - name: Get info about services
+      ansible.builtin.service_facts:
+
+    - name: Assert that logid is running
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services['logid.service']['state'] == 'running'

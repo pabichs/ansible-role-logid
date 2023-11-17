@@ -1,0 +1,10 @@
+---
+logid_version: "v0.3.3"
+
+logid_dir: /opt/logid
+logid_build_dir: "{{ logid_dir }}/build_{{ logid_version }}"
+
+logid_cmake_cmd: "cmake -DDMAKE_BUILD_TYPE=Release .."
+
+logid_service_enabled: true
+logid_service_state: started
