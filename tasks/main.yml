@@ -46,7 +46,6 @@
 
 - name: Install logid
   community.general.make:
-#    cmd: "{{ logid_install_cmd }}"
     target: install
     chdir: "{{ logid_build_dir }}"
   changed_when: code_has_changed.changed

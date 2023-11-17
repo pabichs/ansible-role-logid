@@ -2,14 +2,9 @@
 logid_version: "v0.3.3"
 
 logid_dir: /opt/logid
-logid_config_owner: root
-logid_config_group: root
-logid_config_mode: "755"
 logid_build_dir: "{{ logid_dir }}/build_{{ logid_version }}"
 
 logid_cmake_cmd: "cmake -DDMAKE_BUILD_TYPE=Release .."
-logid_build_cmd: "cmake -DCMAKE_BUILD_TYPE=Release .. && make"
-logid_install_cmd: "make install"
 
 logid_service_enabled: true
 logid_service_state: started
