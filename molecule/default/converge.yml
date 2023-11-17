@@ -1,6 +1,13 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    logid_config: |
+      devices: (
+          {
+            name: "MX Master 3 for Mac";
+          }
+      )
   pre_tasks:
     - name: Update apt cache.
       ansible.builtin.apt:
