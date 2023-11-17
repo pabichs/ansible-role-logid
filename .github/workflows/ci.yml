@@ -23,7 +23,6 @@ jobs:
     strategy:
       matrix:
         distro:
-          - debian12
           - ubuntu2204
         logid_version:
           - v0.2.4
