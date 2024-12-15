@@ -24,6 +24,7 @@ jobs:
       matrix:
         distro:
           - ubuntu2204
+          - fedora41
         logid_version:
           - v0.2.4
           - v0.3.0
