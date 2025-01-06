@@ -1,0 +1,10 @@
+---
+logid_dependencies:
+  - cmake
+  - libevdev-devel
+  - systemd-devel
+  - libconfig-devel
+  - gcc-c++
+  - glib2-devel
+  - python3-libdnf5
+  - git
